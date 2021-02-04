@@ -29,7 +29,7 @@ function Status(props) {
             <div className="status-bar">
                 <div className="like-icon" />
             </div>
-            {/* comment section */}
+
             {commentSection()}
         </div>
         // <h1>{status.text}</h1>

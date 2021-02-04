@@ -2,6 +2,7 @@
 import './App.css';
 import { useState } from 'react'
 import Status from './components/Status'
+import Navbar from './components/Navbar'
 function App() {
   const [user, setUser] = useState(null)
   const [statusList, setStatusList] = useState([
@@ -16,7 +17,11 @@ function App() {
   }
   return (
     <div className="app">
-      {statusSection()}
+      <Navbar />
+      <div className="status-container">
+        {statusSection()}
+      </div>
+
     </div>
   );
 }

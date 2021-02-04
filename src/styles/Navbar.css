@@ -1,0 +1,49 @@
+.navbar {
+  width: 100%;
+  height: 60px;
+  box-shadow: 0px 1px 10px gray;
+  background: blue;
+  position: fixed;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .introduce {
+  background-color: green;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  background-color: white;
+  margin-left: 10px;
+}
+
+.navbar .introduce .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  /* background-color: red; */
+}
+
+/* 
+logo trang
+introduce
+anh dai dien 
+gmail 
+ten
+buttonlogout */
+
+.navbar .button-log {
+  width: 90px;
+  height: 90%;
+  margin-right: 5px;
+}
