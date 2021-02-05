@@ -1,18 +1,22 @@
 {
   "homepage": "http://thaison111299.github.io/zenix",
   "name": "zenix",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
+    "firebase": "^8.2.2",
+    "node-libs-react-native": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
+    "react-firebase-hooks": "^2.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "realm": "^10.1.2",
+    "web-vitals": "^0.2.4",
+    "whatwg-fetch": "^3.5.0"
   },
   "scripts": {
     "predeploy": "npm run build",

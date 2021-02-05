@@ -19,7 +19,8 @@ function Comment(props) {
                 <div className="comment-content">
                     <h5 className="comment-text">{comment.text}</h5>
                     <div className="comment-bar">
-                        <div className="like-icon" />
+                        {/* <div className="like-icon like" /> */}
+                        <h5>like</h5>
                         <h5>show reply</h5>
                         <h5>reply</h5>
                     </div>

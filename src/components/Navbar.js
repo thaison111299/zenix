@@ -8,8 +8,12 @@ function Navbar() {
             <div className="logo">
 
             </div>
-            <div className="introduce">
-                <img className="avatar" url={URL} />
+            <div className="navbar-introduce">
+                <img className="avatar" src={URL} />
+                <div className="introduce-text" >
+                    <h3 className="name">nguyen hoang long</h3>
+                    <h4 className="email">longhudsad@gmail.com</h4>
+                </div>
             </div>
             <button className="button-log">logout</button>
         </div>

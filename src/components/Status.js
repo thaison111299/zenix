@@ -27,7 +27,8 @@ function Status(props) {
 
             <h3 className="status-text">{status.text}</h3>
             <div className="status-bar">
-                <div className="like-icon" />
+                <div className="like-icon like" />
+                <h4 className="show-comment">show comment</h4>
             </div>
 
             {commentSection()}
