@@ -95,7 +95,8 @@ function App() {
 
     let newStatus = {
       text: statusText,
-      by: user
+      by: user,
+      like: []
     }
     uploadDocument("statuslist", newStatus, "text")
     setStatusText('')
@@ -106,7 +107,7 @@ function App() {
     <div className="app">
       {user &&
         <>
-          <Navbar userList={userList} setUser={setUser} user={user} />
+          <Navbar statusList={statusList} userList={userList} setUser={setUser} user={user} />
 
           {/* upload status o day */}
           <form className="form-upload-status" onSubmit={handleUploadStatus}>

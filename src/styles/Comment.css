@@ -85,6 +85,12 @@
 .comment-bar h5 {
   margin: 0px 7px;
   color: white;
+  user-select: none;
+  /* padding: 2px; */
+}
+
+.comment-bar h5:hover {
+  background-color: black;
 }
 
 .reply-section {

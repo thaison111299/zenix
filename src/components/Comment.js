@@ -1,3 +1,4 @@
+import deleteDocumentById from '../firebase/deleteDocumentById'
 import '../styles/Comment.css'
 
 function Comment(props) {
@@ -6,6 +7,11 @@ function Comment(props) {
         { text: "reply 1", ofId: "2", id: "1" },
         { text: "reply 2", ofId: "2", id: "2" },
     ]
+
+    function handleDelete() {
+        // console.log("delete")
+        deleteDocumentById('commentlist', comment.id)
+    }
 
     return (
         <div className="comment">
@@ -18,8 +24,13 @@ function Comment(props) {
                     <h5 className="comment-text">{comment.text}</h5>
                     <div className="comment-bar">
                         <h5>like</h5>
-                        <h5>show reply</h5>
                         <h5>reply</h5>
+
+                        {user.id === comment.by.id &&
+                            <h5 onClick={handleDelete}>delete</h5>
+                        }
+
+
                     </div>
                 </div>
             </div>

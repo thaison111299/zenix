@@ -1,0 +1,47 @@
+.result {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100px; */
+  /* background-color: blue; */
+  margin-bottom: 15px;
+  /* background: gainsboro; */
+  /* box-shadow: 2px 0px 5px gray; */
+  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
+}
+
+.type {
+  width: 100px;
+  height: 100%;
+  /* background-color: green; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.value {
+  /* padding: 10px; */
+  background-color: aliceblue;
+  width: 430px;
+  /* height: 100%; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  word-wrap: break-word;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.result .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.background-white {
+  background-color: white;
+}
