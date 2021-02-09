@@ -8,8 +8,17 @@ import updateDocument from '../firebase/updateDocument'
 import GetSpecifyDocuments from '../firebase/getSpecifyDocuments'
 import GetCommentsByStatusId from '../firebase/getCommentsByStatusId'
 import deleteDocumentById from '../firebase/deleteDocumentById'
+import { connect } from 'react-redux'
+import { setStatusList_a } from '../redux/actions/statusActions'
+import { Link } from 'react-router-dom'
+import { setUserClick_a } from '../redux/actions/userActions'
+
 function Status(props) {
-	const { status, user } = props
+	const {
+		status,
+		user,
+		setUserClick
+	} = props
 
 	// const [commentList, setCommentList] = useState([
 	// 	{ id: "1", text: "ban co sao khong", ofId: "1" },
@@ -20,12 +29,11 @@ function Status(props) {
 	const commentList = GetCommentsByStatusId('commentlist', status.id)
 	const [commentText, setCommentText] = useState('')
 	const [showComment, setShowComment] = useState(true)
+
 	const [liked, setLiked] = useState(false)
 
 
-
 	useEffect(() => {
-
 		for (let i = 0; i < status.like.length; i++) {
 			if (status.like[i].id === user.id) {
 				// console.log("you liked ")
@@ -94,12 +102,16 @@ function Status(props) {
 		console.log("deleted")
 		deleteDocumentById('statuslist', status.id)
 	}
+	function handleClickTitle() {
+		setUserClick(status.by)
 
+	}
 	const defaultAvatarURL = "https://i.pinimg.com/" +
 		"originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
 	return (
+
 		<div className="status">
-			<div className="introduce">
+			<Link to="/information" className="introduce" onClick={handleClickTitle}>
 				<img alt="avatar" className="user-avatar" src={status.by.avatarURL} />
 				<h2 className="user-name">{status.by.name}</h2>
 				{
@@ -108,9 +120,30 @@ function Status(props) {
 
 				}
 
-			</div>
+			</Link>
 
 			<h3 className="status-text">{status.text}</h3>
+			{status.pictureUrl &&
+				<>
+					{status.fileType === 'image' &&
+						<img
+							className="status-image"
+							src={status.pictureUrl}
+						/>
+					}
+
+					{status.fileType === 'video' &&
+
+						<video className="status-video" controls>
+							<source src={status.pictureUrl} type="video/mp4" />
+						</video>
+					}
+
+
+				</>
+
+			}
+
 			<div className="status-bar">
 				<div
 					onClick={handleLike}
@@ -153,4 +186,18 @@ function Status(props) {
 	)
 }
 
-export default Status
+
+function mapState(state) {
+	return state
+}
+
+function mapDispatch(dispatch) {
+	return {
+		setUserClick: (user) => dispatch(setUserClick_a(user))
+	}
+}
+
+
+// export default App;
+export default connect(mapState, mapDispatch)(Status)
+

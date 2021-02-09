@@ -1,52 +1,61 @@
-
-import './App.css';
-import { useState, useEffect } from 'react'
-import Status from './components/Status'
+import Home from './components/Home'
 import Navbar from './components/Navbar'
-import Friend from './components/Friend'
-import updateDocument from './firebase/updateDocument';
-import uploadDocument from './firebase/uploadDocument';
-import GetDocuments from './firebase/getDocuments';
-import vein from './vein.js'
+import GetDocuments from './firebase/getDocuments'
+import { useState, useEffect } from 'react'
+import vein from './vein'
+import uploadDocument from './firebase/uploadDocument'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import Information from './components/Information'
+import './App.css'
+import { connect } from 'react-redux'
+import { setUser_a, setUserList_a } from './redux/actions/userActions'
+import { setStatusList_a } from './redux/actions/statusActions'
 
-function App() {
+
+function App(props) {
+  const {
+    user,
+    setUser,
+    setUserList,
+  } = props
+
   const userList = GetDocuments("userlist")
-  const statusList = GetDocuments("statuslist")
-  const [user, setUser] = useState(null)
-  const [showFriend, setShowFriend] = useState(true)
-  const [doRegister, setDoRegister] = useState(false)
+
+
+  useEffect(() => {
+    setUserList(userList)
+  }
+    , [userList])
+
   const [newName, setNewName] = useState('')
   const [newEmail, setNewEmail] = useState('')
   const [newAvatarURL, setNewAvatarURL] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
-  const [statusText, setStatusText] = useState('')
-  const handleWidthChange = () => {
-    if (window.innerWidth <= 1263) {
-      setShowFriend(false)
-    } else {
-      setShowFriend(true);
-    }
-  };
-
-  window.addEventListener('resize', handleWidthChange);
+  const [doRegister, setDoRegister] = useState(false)
   useEffect(() => {
-    handleWidthChange()
     setUser(vein.getCookieObject("user"))
-
+    console.log("props: ", props)
   }, [])
 
-  function statusSection() {
-    return statusList.map(st => {
-      return (<Status user={user} status={st} key={st.id} />)
-    })
+
+  function handleLogin(e) {
+    e.preventDefault()
+
+    if (userList) {
+      for (let i = 0; i < userList.length; i++) {
+        let { email, password } = userList[i]
+        if (email === loginEmail && password === loginPassword) {
+          vein.uploadCookie("user", userList[i])
+          setUser(userList[i])
+          return;
+        }
+      }
+      alert("email or password wrong")
+    }
   }
-  function friendSection() {
-    return userList.map(fr => {
-      return (<Friend person={fr} />)
-    })
-  }
+
 
   const defaultAvatarURL = "https://i.pinimg.com/" +
     "originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
@@ -74,104 +83,73 @@ function App() {
     }
 
   }
-  function handleLogin(e) {
-    e.preventDefault()
-
-    if (userList) {
-      for (let i = 0; i < userList.length; i++) {
-        let { email, password } = userList[i]
-        if (email === loginEmail && password === loginPassword) {
-          vein.uploadCookie("user", userList[i])
-          setUser(userList[i])
-          return;
-        }
-      }
-      alert("email or password wrong")
-    }
-  }
-  function handleUploadStatus(e) {
-    e.preventDefault()
-    // console.log(statusText)
-
-    let newStatus = {
-      text: statusText,
-      by: user,
-      like: []
-    }
-    uploadDocument("statuslist", newStatus, "text")
-    setStatusText('')
-  }
-
 
   return (
-    <div className="app">
-      {user &&
-        <>
-          <Navbar statusList={statusList} userList={userList} setUser={setUser} user={user} />
+    <Router>
 
-          {/* upload status o day */}
-          <form className="form-upload-status" onSubmit={handleUploadStatus}>
-            <input
-              value={statusText}
-              onChange={(e) => setStatusText(e.target.value)}
-              type="text"
-              required
-              placeholder={`${user.name}, write something...`} />
-            <button>upload</button>
-          </form>
+      <div className="app">
+        {user &&
+          < Navbar />
+        }
+        <Route path="/" exact component={Home} />
+        {user &&
+          <Route path="/information" component={Information} />
+        }
 
-          <div className="main-section">
-            {showFriend &&
-              <div className="friend-section">
-                {friendSection()}
-              </div>
-            }
 
-            <div className="status-container">
-              {statusSection()}
+
+        {!doRegister && !user &&
+          // login
+          <form form className="form-log" onSubmit={handleLogin}>
+            <div className="zenix-intro">
+              <div className="white-logo"></div>
+              <h1>ZENIX</h1>
             </div>
-          </div>
+            <h1>LOGIN</h1>
+            <input onChange={(e) => setLoginEmail(e.target.value)} required className="input-log" placeholder="email" type="text" />
+            <input onChange={(e) => setLoginPassword(e.target.value)} required className="input-log" placeholder="password" type="password" />
+            <button className="button-log">login</button>
+            <button onClick={() => setDoRegister(true)} className="button-log">register</button>
+          </form>
+        }
 
-        </>
-      }
-
-      {!doRegister && !user &&
-        // login
-        <form form className="form-log" onSubmit={handleLogin}>
-          <div className="zenix-intro">
-            <div className="white-logo"></div>
-            <h1>ZENIX</h1>
-          </div>
-          <h1>LOGIN</h1>
-          <input onChange={(e) => setLoginEmail(e.target.value)} required className="input-log" placeholder="email" type="text" />
-          <input onChange={(e) => setLoginPassword(e.target.value)} required className="input-log" placeholder="password" type="text" />
-          <button className="button-log">login</button>
-          <button onClick={() => setDoRegister(true)} className="button-log">register</button>
-        </form>
-      }
-
-
-      {
-        doRegister && !user &&
-        <form className="form-log" onSubmit={createUser}>
-          <div className="zenix-intro">
-            <div className="white-logo"></div>
-            <h1>ZENIX</h1>
-          </div>
-          <h1>CREATE NEW</h1>
-          <input required onChange={(e) => setNewName(e.target.value)} className="input-log" placeholder="name" type="text" />
-          <input onChange={(e) => setNewAvatarURL(e.target.value)} className="input-log" placeholder="avatar url" type="text" />
-          <input required onChange={(e) => setNewEmail(e.target.value)} className="input-log" placeholder="email" type="text" />
-          <input required onChange={(e) => setNewPassword(e.target.value)} className="input-log" placeholder="password" type="text" />
-          <button className="button-log">create</button>
-          <button onClick={() => setDoRegister(false)} className="button-log">back to login</button>
-        </form>
-      }
+        {
+          doRegister && !user &&
+          <form className="form-log" onSubmit={createUser}>
+            <div className="zenix-intro">
+              <div className="white-logo"></div>
+              <h1>ZENIX</h1>
+            </div>
+            <h1>CREATE NEW</h1>
+            <input required onChange={(e) => setNewName(e.target.value)} className="input-log" placeholder="name" type="text" />
+            <input onChange={(e) => setNewAvatarURL(e.target.value)} className="input-log" placeholder="avatar url" type="text" />
+            <input required onChange={(e) => setNewEmail(e.target.value)} className="input-log" placeholder="email" type="text" />
+            <input required onChange={(e) => setNewPassword(e.target.value)} className="input-log" placeholder="password" type="password" />
+            <button className="button-log">create</button>
+            <button onClick={() => setDoRegister(false)} className="button-log">back to login</button>
+          </form>
+        }
 
 
+      </div>
 
-    </div >
-  );
+    </Router>
+
+  )
 }
 
-export default App;
+function mapState(state) {
+  return state
+}
+
+function mapDispatch(dispatch) {
+  return {
+    setUser: (user) => dispatch(setUser_a(user)),
+    setUserList: (userList) => dispatch(setUserList_a(userList))
+
+  }
+}
+
+
+
+export default connect(mapState, mapDispatch)(App)

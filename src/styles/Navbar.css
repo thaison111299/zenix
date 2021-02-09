@@ -26,6 +26,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
+}
+.navbar .navbar-introduce:hover {
+  background-color: whitesmoke;
 }
 
 .navbar-introduce .introduce-text {

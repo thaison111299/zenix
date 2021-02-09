@@ -1,0 +1,215 @@
+.app {
+  /* width: 100%; */
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* unselect text */
+.unselect {
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.status-container {
+  /* position: absolute; */
+  /* left: 10px; */
+  width: 100%;
+  min-width: 300px;
+  max-width: 650px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  /* margin: auto; */
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: ; */
+  position: relative;
+  z-index: 1;
+}
+
+.friend-section {
+  top: 110px;
+  right: 30px;
+  position: fixed;
+
+  /* background-color: blue; */
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.dialog {
+  width: 100%;
+  height: 1000px;
+  background: gray;
+  z-index: 3;
+  /* position: fixed; */
+}
+
+.form-log {
+  margin-top: 100px;
+  /* margin: auto; */
+  /* justify-self: auto;
+  align-self: auto; */
+  min-width: 350px;
+  width: 70%;
+  /* background-color: gainsboro; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 650px;
+  /* for test */
+  margin-bottom: 200px;
+  box-shadow: 5px 5px 10px gray;
+}
+
+.form-log .zenix-intro {
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-log .zenix-intro .white-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 30%;
+  margin-right: 20px;
+  background-color: blue;
+}
+
+.input-log {
+  margin-bottom: 20px;
+  width: 300px;
+  height: 35px;
+  font-size: 20px;
+  padding-left: 20px;
+  border-radius: 3px;
+  border: 1px solid rgb(235, 232, 232);
+  /* box-shadow: 1px 0px 4px gray; */
+}
+
+input:focus {
+  outline: none;
+}
+.input-log:focus {
+  background-color: rgb(240, 238, 238);
+}
+button:focus {
+  outline: none;
+}
+.form-log .button-log {
+  margin-top: 10px;
+  border: none;
+  font-size: 20px;
+  color: white;
+  background: blue;
+  width: 300px;
+  height: 35px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.form-log .button-log:hover {
+  background: darkblue;
+}
+
+.form-upload-status {
+  margin-top: 80px;
+  width: 90%;
+  min-width: 300px;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: gray; */
+  padding: 10px;
+  /* height: px; */
+  box-shadow: 0px 1px 5px gray;
+  border-radius: 5px;
+  /* background-color: black; */
+}
+
+.form-upload-status input {
+  width: 90%;
+  /* height: 50px; */
+  height: 200px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+  background-color: aliceblue;
+  font-size: 17px;
+  padding: 0px 10px;
+}
+
+.form-upload-status button {
+  width: 150px;
+  height: 55px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 15px;
+  background-color: azure;
+  border: 1px solid black;
+  color: lightslategrey;
+  font-size: 16px;
+}
+
+.form-upload-status button:hover {
+  background-color: blue;
+  color: white;
+}
+
+.form-upload-status .bar {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  /* background-color: azure; */
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  position: relative;
+  /* height: 100px; */
+}
+.form-upload-status .bar .icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 0%;
+  /* background-color: red; */
+  margin-top: 20px;
+  /* margin-left: 10px; */
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+}
+
+.form-upload-status .bar button {
+  margin-bottom: 10px;
+}
+
+.form-upload-status .bar .file {
+  width: 200px;
+  height: 30px;
+  display: none;
+}
