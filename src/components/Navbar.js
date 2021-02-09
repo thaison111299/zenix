@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { setUser_a } from '../redux/actions/userActions'
+import { setUserClick_a, setUser_a } from '../redux/actions/userActions'
 import '../styles/Navbar.css'
 import vein from '../vein'
 import Friend from './Friend'
 import Result from './Result'
 import { Link } from 'react-router-dom'
+import { getByDisplayValue } from '@testing-library/react'
 function Navbar(props) {
-  const { setUser, user, userList, statusList } = props
+  const DIR_PATH = "/zenix"
+  const { setUser, user, userList, statusList, setUserClick } = props
   // const [search, setSearch] = useState(false)
   const [full, setFull] = useState(true)
   const [show, setShow] = useState(false)
@@ -90,11 +92,16 @@ function Navbar(props) {
   const friendsIconURL = "https://img.icons8.com/ios/452/friends.png"
 
   const logoutIconURL = "https://www.iconpacks.net/icons/2/free-exit-logout-icon-2857-thumb.png"
+
+  function handleClick() {
+    setUserClick(user)
+  }
   return (
     <div className="navbar-container">
       <div className={"navbar"}>
-
-        <Link to="/">
+        <Link to={DIR_PATH + "/"}
+          onClick={() => setUserClick(null)}
+        >
           <div className="logo">
           </div>
         </Link>
@@ -122,8 +129,12 @@ function Navbar(props) {
 
             <Link
               className="navbar-introduce"
-              to="/information">
-              <img className="avatar" src={user.avatarURL} />
+              to={DIR_PATH + "/information"}
+
+              onClick={handleClick}>
+              <img
+                className="avatar"
+                src={user.avatarURL} />
               <div className="introduce-text" >
                 <h3 className="name">{user.name}</h3>
                 <h4 className="email">{user.email}</h4>
@@ -185,7 +196,8 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    setUser: (user) => dispatch(setUser_a(user))
+    setUser: (user) => dispatch(setUser_a(user)),
+    setUserClick: (user) => dispatch(setUserClick_a(user))
   }
 }
 

@@ -4,7 +4,7 @@ import GetDocuments from './firebase/getDocuments'
 import { useState, useEffect } from 'react'
 import vein from './vein'
 import uploadDocument from './firebase/uploadDocument'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Information from './components/Information'
 import './App.css'
 import { connect } from 'react-redux'
@@ -13,6 +13,7 @@ import { setStatusList_a } from './redux/actions/statusActions'
 
 
 function App(props) {
+  const DIR_PATH = "/zenix"
   const {
     user,
     setUser,
@@ -91,12 +92,13 @@ function App(props) {
         {user &&
           < Navbar />
         }
-        <Route path="/" exact component={Home} />
-        {user &&
-          <Route path="/information" component={Information} />
-        }
-
-
+        <Switch>
+          <Route path={"/zenix/"} exact component={Home} />
+          {user &&
+            <Route path={DIR_PATH + "/information"} exact component={Information} />
+          }
+          <Route path="/" exact component={Home} />
+        </Switch>
 
         {!doRegister && !user &&
           // login

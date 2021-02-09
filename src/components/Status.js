@@ -14,11 +14,13 @@ import { Link } from 'react-router-dom'
 import { setUserClick_a } from '../redux/actions/userActions'
 
 function Status(props) {
+	const DIR_PATH = "/zenix"
 	const {
 		status,
 		user,
 		setUserClick
 	} = props
+
 
 	// const [commentList, setCommentList] = useState([
 	// 	{ id: "1", text: "ban co sao khong", ofId: "1" },
@@ -111,7 +113,7 @@ function Status(props) {
 	return (
 
 		<div className="status">
-			<Link to="/information" className="introduce" onClick={handleClickTitle}>
+			<Link to={DIR_PATH + "/information"} className="introduce" onClick={handleClickTitle}>
 				<img alt="avatar" className="user-avatar" src={status.by.avatarURL} />
 				<h2 className="user-name">{status.by.name}</h2>
 				{
@@ -123,7 +125,8 @@ function Status(props) {
 			</Link>
 
 			<h3 className="status-text">{status.text}</h3>
-			{status.pictureUrl &&
+			{
+				status.pictureUrl &&
 				<>
 					{status.fileType === 'image' &&
 						<img
@@ -161,7 +164,8 @@ function Status(props) {
 					className="show-comment">{showComment ? `hide ${commentList.length} comment` : `show ${commentList.length} comment`}</h4>
 			</div>
 
-			{showComment &&
+			{
+				showComment &&
 				<>
 					<form
 						className="form-upload-comment"
@@ -182,7 +186,7 @@ function Status(props) {
 
 			}
 
-		</div>
+		</div >
 	)
 }
 
