@@ -23,12 +23,17 @@ function Home(props) {
 
   const statusList = GetDocuments("statuslist")
 
+  const [friendList, setFriendList] = useState([])
+
   useEffect(() => {
     if (statusList) {
       setStatusList(statusList)
     }
 
   }, [statusList])
+
+
+  // console.log(userList)
 
   const [showFriend, setShowFriend] = useState(true)
 

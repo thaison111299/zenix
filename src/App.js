@@ -10,14 +10,18 @@ import './App.css'
 import { connect } from 'react-redux'
 import { setUser_a, setUserList_a } from './redux/actions/userActions'
 import { setStatusList_a } from './redux/actions/statusActions'
+import updateDocument from './firebase/updateDocument'
+import GetFriends from './firebase/GetFriends'
 
 
 function App(props) {
   const DIR_PATH = "/zenix"
+  // const [friendList, setFriendList] = useState
   const {
     user,
     setUser,
     setUserList,
+    userClick
   } = props
 
   const userList = GetDocuments("userlist")
@@ -38,8 +42,18 @@ function App(props) {
   useEffect(() => {
     setUser(vein.getCookieObject("user"))
     console.log("props: ", props)
+
   }, [])
 
+
+
+  useEffect(() => {
+    console.log("set user")
+    if (user) {
+      setUser(user)
+    }
+
+  }, [user])
 
   function handleLogin(e) {
     e.preventDefault()
@@ -92,12 +106,18 @@ function App(props) {
         {user &&
           < Navbar />
         }
+
+
         <Switch>
-          <Route path={"/zenix/"} exact component={Home} />
-          {user &&
+          {
+            user &&
+            <Route path={"/zenix/"} exact component={Home} />
+          }
+
+          {userClick &&
             <Route path={DIR_PATH + "/information"} exact component={Information} />
           }
-          <Route path="/" exact component={Home} />
+          <Route path="/" component={Home} />
         </Switch>
 
         {!doRegister && !user &&
