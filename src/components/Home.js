@@ -21,6 +21,7 @@ function Home(props) {
     setStatusList
   } = props
 
+
   const statusList = GetDocuments("statuslist")
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function Home(props) {
   const [file, setFile] = useState(null)
   const [pictureUrl, setPictureUrl] = useState('')
   const [fileType, setFileType] = useState('image')
+  const [progress, setProgress] = useState(0)
   const handleWidthChange = () => {
     if (window.innerWidth <= 1263) {
       setShowFriend(false)
@@ -88,11 +90,11 @@ function Home(props) {
     uploadDocument("statuslist", newStatus, "text")
     setStatusText('')
     setPictureUrl('')
+    setProgress(0)
     setFile(null)
   }
 
   useEffect(() => {
-    // console.log("url: ", pictureUrl)
     if (file) {
       console.log(file)
       if (file.type.includes('image')) {
@@ -101,10 +103,11 @@ function Home(props) {
       } else {
         setFileType('video')
       }
-      StoragePicture(file, setPictureUrl)
+      StoragePicture(file, setPictureUrl, setProgress)
 
     } else {
       setPictureUrl('')
+      setProgress(0)
     }
 
 
@@ -146,12 +149,27 @@ function Home(props) {
               />
 
             </div>
-            {/* <h1 >{"URL: ", pictureUrl}</h1> */}
+            {file &&
+              <h3>upload: {progress} %</h3>
+            }
+
             {
-              pictureUrl &&
-
+              pictureUrl && fileType === "image" &&
               <img src={pictureUrl} style={{ width: "200px", height: "200px" }} />
+            }
+            {
+              pictureUrl && fileType === "video" &&
+              // <img src={pictureUrl} style={{ width: "200px", height: "200px" }} />
+              <video
+                style={{ width: "200px", height: "200px" }}
+                controls>
+                <source src={pictureUrl} />
+              </video>
+            }
 
+            {
+              progress === 100 &&
+              <h3>file is ready</h3>
 
             }
 
