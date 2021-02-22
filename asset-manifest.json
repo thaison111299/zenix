@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/zenix/static/css/main.a21e3c81.chunk.css",
+    "main.css": "/zenix/static/css/main.d850bf89.chunk.css",
     "main.js": "/zenix/static/js/main.0b8ea755.chunk.js",
     "main.js.map": "/zenix/static/js/main.0b8ea755.chunk.js.map",
     "runtime-main.js": "/zenix/static/js/runtime-main.78ffe801.js",
@@ -8,13 +8,13 @@
     "static/js/2.da4d0486.chunk.js": "/zenix/static/js/2.da4d0486.chunk.js",
     "static/js/2.da4d0486.chunk.js.map": "/zenix/static/js/2.da4d0486.chunk.js.map",
     "index.html": "/zenix/index.html",
-    "static/css/main.a21e3c81.chunk.css.map": "/zenix/static/css/main.a21e3c81.chunk.css.map",
+    "static/css/main.d850bf89.chunk.css.map": "/zenix/static/css/main.d850bf89.chunk.css.map",
     "static/js/2.da4d0486.chunk.js.LICENSE.txt": "/zenix/static/js/2.da4d0486.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.78ffe801.js",
     "static/js/2.da4d0486.chunk.js",
-    "static/css/main.a21e3c81.chunk.css",
+    "static/css/main.d850bf89.chunk.css",
     "static/js/main.0b8ea755.chunk.js"
   ]
 }
